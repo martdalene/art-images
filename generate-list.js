@@ -12,10 +12,12 @@ const getMetadata = (filePath) => {
 };
 
 // Function to get all .jpeg files and their metadata in a directory
-const getJPEGFilesWithMetadata = (directoryPath) => {
+const getImageFilesWithMetadata = (directoryPath) => {
   const files = fs.readdirSync(directoryPath);
-  const jpegFiles = files.filter((file) => path.extname(file) === ".jpeg");
-  const filesWithMetadata = jpegFiles.map((file) => ({
+  const imageFiles = files.filter((file) =>
+    [".jpeg", ".jpg", ".png"].includes(path.extname(file).toLowerCase())
+  );
+  const filesWithMetadata = imageFiles.map((file) => ({
     file: "/images/" + file,
     metadata: getMetadata(path.join(directoryPath, file)),
   }));
@@ -23,7 +25,7 @@ const getJPEGFilesWithMetadata = (directoryPath) => {
 };
 
 // Call the function with the directory path and log the result
-const filesWithMetadata = getJPEGFilesWithMetadata(directoryPath);
+const filesWithMetadata = getImageFilesWithMetadata(directoryPath);
 console.log(filesWithMetadata);
 
 fs.writeFileSync("./all-images.json", JSON.stringify(filesWithMetadata));
