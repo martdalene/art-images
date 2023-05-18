@@ -16,7 +16,7 @@ const getJPEGFilesWithMetadata = (directoryPath) => {
   const files = fs.readdirSync(directoryPath);
   const jpegFiles = files.filter((file) => path.extname(file) === ".jpeg");
   const filesWithMetadata = jpegFiles.map((file) => ({
-    file: path.join(directoryPath, file),
+    file: "/images/" + file,
     metadata: getMetadata(path.join(directoryPath, file)),
   }));
   return filesWithMetadata;
