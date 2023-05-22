@@ -24,6 +24,7 @@ const processImages = async () => {
           )
         ) {
           await sharp(imagePath)
+            .withMetadata() // Preserve original image metadata
             .resize(100, 100) // Resize the image to 100x100 px
             .toFile(path.join(outputDir, file));
           console.log(
